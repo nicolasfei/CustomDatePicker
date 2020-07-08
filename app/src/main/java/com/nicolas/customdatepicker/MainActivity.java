@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nicolas.library.CustomDatePicker;
+import com.nicolas.library.CustomDateSlotPicker;
 import com.nicolas.library.DateFormatUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    CustomDatePicker mTimerPicker;
+    CustomDateSlotPicker mTimerPicker;
     TextView view;
 
     @Override
@@ -35,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
         String endTime = DateFormatUtils.long2Str(System.currentTimeMillis() + 63072000000L, true);
         if (mTimerPicker == null) {
             // 通过日期字符串初始化日期，格式请用：yyyy-MM-dd HH:mm
-            mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
+            mTimerPicker = new CustomDateSlotPicker(this, new CustomDateSlotPicker.Callback() {
                 @Override
-                public void onTimeSelected(long timestamp) {
-                    view.setText(DateFormatUtils.long2Str(timestamp, true));
+                public void onTimeSelected(long timestampStart,long timestampEnd) {
+                    view.setText(DateFormatUtils.long2Str(timestampStart, true)+"---"+DateFormatUtils.long2Str(timestampEnd, true));
                 }
             }, beginTime, endTime);
             // 允许点击屏幕或物理返回键关闭
